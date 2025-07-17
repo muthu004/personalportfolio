@@ -1,18 +1,11 @@
 import { useState } from "react";
 
 function Navbar() {
-  const [options, setOptions] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  
-  function choose(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-    if (!isOpen) {
-      setOptions(["Option 1", "Option 2", "Option 3"]);
-    } else {
-      setOptions([]);
-    }
-  }
+  const [click, setclick] = useState(false);
+  const handleClick = (e) => {
+    e.preventDefault(); 
+    setclick(!click);
+  };
 
   return (
     <div>
@@ -23,12 +16,20 @@ function Navbar() {
             <a href="/">Home</a>
           </li>
           <li>
-            <a onClick={choose} href="/about">About</a>
-            {options.map((option, index) => (
-              <div key={index} className="option-item">
-                {option}
-              </div>
-            ))}
+            <a onClick={handleClick} href="/about">
+              About
+            </a>
+
+            {click && (
+              <ul>
+                <li>
+                  <a href="/projects">Projects</a>
+                </li>
+                <li>
+                  <a href="/contact">Contact</a>
+                </li>
+              </ul>
+            )}
           </li>
         </ul>
       </nav>
